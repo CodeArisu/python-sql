@@ -1,21 +1,6 @@
 import mysql.connector
+from layout.config import config
 from common.queries import query_select, query_insert
-
-
-def config():
-    import os
-    from dotenv import load_dotenv
-    # Load environment variables from .env file
-    load_dotenv()
-    # Load environment variables from .env file
-    # Ensure you have a .env file with the following variables:
-    return {
-        'host': os.getenv('DB_HOST', 'localhost'),
-        'user': os.getenv('DB_USER', 'root'),
-        'password': os.getenv('DB_PASSWORD', ''),
-        'database': os.getenv('DB_NAME', 'testdb')
-    }
-
 
 def main():
     # Get database configuration from environment variables
@@ -26,8 +11,8 @@ def main():
     if connection.is_connected():
         print("Connected to the database")
 
-        # query_select("SELECT * FROM", "colors", connection)
-        query_insert("INSERT INTO", "colors", "color", "Violet", connection)
+        query_select("colors", connection)
+        # query_insert("colors", "color", "Orange", connection)
         
         connection.close()
     else:
